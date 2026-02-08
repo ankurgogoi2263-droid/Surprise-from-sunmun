@@ -8,111 +8,93 @@
 <style>
 body {
   margin: 0;
-  background: linear-gradient(135deg, #ffe6f0, #fff5fa);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #ffe6f0, #fff0f5);
   font-family: 'Segoe UI', sans-serif;
-  text-align: center;
-  overflow: hidden;
 }
 
-.container {
-  margin: 8vh auto;
+.card {
+  background: white;
+  padding: 24px;
+  border-radius: 18px;
   max-width: 90%;
-  background: rgba(255,255,255,0.95);
-  padding: 25px;
-  border-radius: 20px;
-  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-  position: relative;
-  z-index: 2;
+  text-align: center;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
 }
 
-h2 {
-  color: #e60073;
+h1 {
+  color: #ff2f92;
 }
 
-p {
-  font-size: 17px;
-  line-height: 1.6;
-  color: #333;
+.tap {
+  margin-top: 20px;
+  font-weight: bold;
+  color: #ff4da6;
+  animation: pulse 1.2s infinite;
 }
 
-#playBtn {
-  margin-top: 15px;
-  padding: 12px 22px;
-  font-size: 16px;
-  border: none;
-  border-radius: 25px;
-  background: #e60073;
-  color: white;
-  cursor: pointer;
-}
-
-.emoji {
-  position: fixed;
-  top: -10px;
-  font-size: 24px;
-  animation: fall linear infinite;
-}
-
-@keyframes fall {
-  to {
-    transform: translateY(110vh);
-    opacity: 0;
-  }
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.4; }
+  100% { opacity: 1; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- BACKGROUND MUSIC -->
-<audio id="bgMusic" preload="auto">
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_4c7b1a8c9e.mp3?filename=romantic-piano-112191.mp3" type="audio/mpeg">
-</audio>
-
-<div class="container">
-  <h2>Abhipriya ❤️</h2>
+<div class="card" id="tapArea">
+  <h1>Abhipriya ❤️</h1>
 
   <p>
     aji moi bhal paw buli koileu kom hobo.<br>
-    Tumar hahi, tumar kotha, aru tumar logot thaka protitu khon<br>
-    moi din-bhor bhabi thaku.<br><br>
-
-    Tumi mur monor ekdom nishabd jogotot ahi<br>
-    sobtu hundor kori dila.<br><br>
-
-    Moi tumak bhal paw—hohaj bhabe, huddho bhabe.<br>
-    Jodi tumar monot eitu ekei bhabona ase,<br>
-    tente moi tumar haat dhori<br>
-    aji aru agami dinot tumar logot thakibo bisaru.<br><br>
-
-    <strong>Tumi mur MANUHJONI hoba ne?</strong><br>
-    <strong>I love you ❤️</strong>
+    Tumar hahi, tumar kotha, aru tumar logot thaka
+    protitu khon moi din-bhor bhabi thaku.
   </p>
 
-  <button id="playBtn">🎵 Play Music</button>
+  <p>
+    Tumi mur monor ekdom nishabd jogotot ahi
+    sobtu hundor kori dila.
+  </p>
+
+  <p>
+    Moi tumak bhal paw — hohaj bhabe, huddho bhabe.
+  </p>
+
+  <p>
+    Jodi tumar monot eitu ekei bhabona ase,
+    tente moi tumar haat dhori
+    aji aru agami dinot tumar logot thakibo bisaru.
+  </p>
+
+  <p><b>Tumi mur MANUH-JONI hoba ne?</b><br>
+  I love you ❤️</p>
+
+  <div class="tap">💖 Tap anywhere for magic 🎶</div>
 </div>
 
+<audio id="music" preload="auto">
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
 <script>
-const music = document.getElementById("bgMusic");
-const playBtn = document.getElementById("playBtn");
+const audio = document.getElementById("music");
+const area = document.getElementById("tapArea");
 
-playBtn.addEventListener("click", () => {
-  music.volume = 0.7;
-  music.play();
-  playBtn.innerText = "💖 Music Playing";
+area.addEventListener("click", () => {
+  audio.muted = false;
+  audio.volume = 1.0;
+
+  audio.play().then(() => {
+    console.log("Audio playing");
+  }).catch(err => {
+    console.log("Play failed, retrying...");
+    setTimeout(() => audio.play(), 300);
+  });
 });
-
-// Falling emojis
-const emojis = ["💖","💕","💘","✨","🌸","😍"];
-for (let i = 0; i < 30; i++) {
-  const e = document.createElement("div");
-  e.className = "emoji";
-  e.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
-  e.style.left = Math.random() * 100 + "vw";
-  e.style.animationDuration = (6 + Math.random() * 6) + "s";
-  e.style.fontSize = (20 + Math.random() * 10) + "px";
-  document.body.appendChild(e);
-}
 </script>
 
 </body>
