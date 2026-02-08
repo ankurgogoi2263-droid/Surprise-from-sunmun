@@ -9,39 +9,76 @@
 body {
   margin: 0;
   min-height: 100vh;
+  background: linear-gradient(135deg, #ffe6f0, #fff5fa);
+  font-family: "Segoe UI", sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #ffe6f0, #fff5fa);
-  font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
 }
 
+/* Card */
 .card {
   background: white;
   padding: 24px;
   border-radius: 20px;
-  max-width: 90%;
+  max-width: 92%;
   text-align: center;
-  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+  z-index: 2;
 }
 
-h2 { color: #e60073; }
+h2 {
+  color: #e60073;
+  margin-bottom: 10px;
+}
 
-.tapBtn {
-  margin-top: 20px;
-  padding: 12px 20px;
-  background: #ff4da6;
-  color: white;
-  border: none;
-  border-radius: 30px;
-  font-size: 16px;
+p {
+  font-size: 17px;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* Tap text */
+.tap {
+  margin-top: 18px;
+  color: #ff4d88;
+  font-weight: bold;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
+/* Falling emojis */
+.emoji {
+  position: fixed;
+  top: -10px;
+  font-size: 22px;
+  pointer-events: none;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh);
+    opacity: 0;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="card">
+<!-- Music -->
+<audio id="bgMusic" preload="auto" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<div class="card" id="tapArea">
   <h2>Abhipriya ❤️</h2>
 
   <p>
@@ -52,22 +89,36 @@ h2 { color: #e60073; }
     Tumi mur monor ekdom nishabd jogotot ahi<br>
     sobtu hundor kori dila.<br><br>
 
-    Moi tumak bhal paw—hohaj bhabe, huddho bhabe.<br><br>
+    Moi tumak bhal paw—hohaj bhabe, huddho bhabe.<br>
+    Jodi tumar monot eitu ekei bhabona ase,<br>
+    tente moi tumar haat dhori<br>
+    aji aru agami dinot tumar logot thakibo bisaru.<br><br>
 
-    <b>Tumi mur MANUHJONI hoba ne?</b><br>
-    I love you ❤️
+    <strong>Tumi mur MANUHJONI hoba ne?</strong><br>
+    <strong>I love you ❤️</strong>
   </p>
 
-  <button class="tapBtn" onclick="playMusic()">🎶 Tap to play music</button>
+  <div class="tap">💖 Tap anywhere for magic 🎶</div>
 </div>
 
-<audio id="bgMusic" src="music.mp3"></audio>
-
 <script>
-function playMusic() {
+// Music play on first tap
+document.body.addEventListener("click", () => {
   const music = document.getElementById("bgMusic");
-  music.volume = 0.8;
-  music.play();
+  music.volume = 0.7;
+  music.play().catch(() => {});
+}, { once: true });
+
+// Falling emojis
+const emojis = ["❤️","💖","💕","💘","✨","🌸","😍"];
+for (let i = 0; i < 40; i++) {
+  const e = document.createElement("div");
+  e.className = "emoji";
+  e.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+  e.style.left = Math.random() * 100 + "vw";
+  e.style.animationDuration = (5 + Math.random() * 6) + "s";
+  e.style.fontSize = (18 + Math.random() * 16) + "px";
+  document.body.appendChild(e);
 }
 </script>
 
