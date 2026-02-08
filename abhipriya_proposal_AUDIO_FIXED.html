@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Abhipriya ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #ffe6f0, #fff5fa);
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+  overflow: hidden;
+}
+
+.container {
+  margin: 8vh auto;
+  max-width: 90%;
+  background: rgba(255,255,255,0.95);
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+  position: relative;
+  z-index: 2;
+}
+
+h2 { color: #e60073; }
+
+p {
+  font-size: 17px;
+  line-height: 1.6;
+  color: #333;
+}
+
+.emoji {
+  position: fixed;
+  top: -10px;
+  font-size: 24px;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  to { transform: translateY(110vh); opacity: 0; }
+}
+
+audio {
+  margin-top: 15px;
+  width: 100%;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Abhipriya ❤️</h2>
+  <p>
+    aji moi bhal paw buli koileu kom hobo.<br>
+    Tumar hahi, tumar kotha, aru tumar logot thaka protitu khon<br>
+    moi din-bhor bhabi thaku.<br><br>
+
+    Tumi mur monor ekdom nishabd jogotot ahi<br>
+    sobtu hundor kori dila.<br><br>
+
+    Moi tumak bhal paw—hohaj bhabe, huddho bhabe.<br>
+    Jodi tumar monot eitu ekei bhabona ase,<br>
+    tente moi tumar haat dhori<br>
+    aji aru agami dinot tumar logot thakibo bisaru.<br><br>
+
+    <strong>Tumi mur MANUHJONI hoba ne?</strong><br>
+    <strong>I love you ❤️</strong>
+  </p>
+
+  <p><strong>🎶 Press play below</strong></p>
+
+  <audio controls>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    Your browser does not support audio.
+  </audio>
+</div>
+
+<script>
+const emojis = ["💖","💕","💘","✨","🌸","😍"];
+for (let i = 0; i < 30; i++) {
+  let e = document.createElement("div");
+  e.className = "emoji";
+  e.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+  e.style.left = Math.random() * 100 + "vw";
+  e.style.animationDuration = (6 + Math.random() * 6) + "s";
+  e.style.fontSize = (20 + Math.random() * 10) + "px";
+  document.body.appendChild(e);
+}
+</script>
+
+</body>
+</html>
