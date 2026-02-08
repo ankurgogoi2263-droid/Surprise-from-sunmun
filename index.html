@@ -12,89 +12,63 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #ffe6f0, #fff0f5);
+  background: linear-gradient(135deg, #ffe6f0, #fff5fa);
   font-family: 'Segoe UI', sans-serif;
 }
 
 .card {
   background: white;
   padding: 24px;
-  border-radius: 18px;
+  border-radius: 20px;
   max-width: 90%;
   text-align: center;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
 }
 
-h1 {
-  color: #ff2f92;
-}
+h2 { color: #e60073; }
 
-.tap {
+.tapBtn {
   margin-top: 20px;
-  font-weight: bold;
-  color: #ff4da6;
-  animation: pulse 1.2s infinite;
-}
-
-@keyframes pulse {
-  0% { opacity: 1; }
-  50% { opacity: 0.4; }
-  100% { opacity: 1; }
+  padding: 12px 20px;
+  background: #ff4da6;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="card" id="tapArea">
-  <h1>Abhipriya ❤️</h1>
+<div class="card">
+  <h2>Abhipriya ❤️</h2>
 
   <p>
     aji moi bhal paw buli koileu kom hobo.<br>
-    Tumar hahi, tumar kotha, aru tumar logot thaka
-    protitu khon moi din-bhor bhabi thaku.
+    Tumar hahi, tumar kotha, aru tumar logot thaka protitu khon<br>
+    moi din-bhor bhabi thaku.<br><br>
+
+    Tumi mur monor ekdom nishabd jogotot ahi<br>
+    sobtu hundor kori dila.<br><br>
+
+    Moi tumak bhal paw—hohaj bhabe, huddho bhabe.<br><br>
+
+    <b>Tumi mur MANUHJONI hoba ne?</b><br>
+    I love you ❤️
   </p>
 
-  <p>
-    Tumi mur monor ekdom nishabd jogotot ahi
-    sobtu hundor kori dila.
-  </p>
-
-  <p>
-    Moi tumak bhal paw — hohaj bhabe, huddho bhabe.
-  </p>
-
-  <p>
-    Jodi tumar monot eitu ekei bhabona ase,
-    tente moi tumar haat dhori
-    aji aru agami dinot tumar logot thakibo bisaru.
-  </p>
-
-  <p><b>Tumi mur MANUH-JONI hoba ne?</b><br>
-  I love you ❤️</p>
-
-  <div class="tap">💖 Tap anywhere for magic 🎶</div>
+  <button class="tapBtn" onclick="playMusic()">🎶 Tap to play music</button>
 </div>
 
-<audio id="music" preload="auto">
-  <source src="music.mp3" type="audio/mpeg">
-</audio>
+<audio id="bgMusic" src="music.mp3"></audio>
 
 <script>
-const audio = document.getElementById("music");
-const area = document.getElementById("tapArea");
-
-area.addEventListener("click", () => {
-  audio.muted = false;
-  audio.volume = 1.0;
-
-  audio.play().then(() => {
-    console.log("Audio playing");
-  }).catch(err => {
-    console.log("Play failed, retrying...");
-    setTimeout(() => audio.play(), 300);
-  });
-});
+function playMusic() {
+  const music = document.getElementById("bgMusic");
+  music.volume = 0.8;
+  music.play();
+}
 </script>
 
 </body>
