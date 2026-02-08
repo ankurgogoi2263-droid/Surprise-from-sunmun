@@ -25,7 +25,9 @@ body {
   z-index: 2;
 }
 
-h2 { color: #e60073; }
+h2 {
+  color: #e60073;
+}
 
 p {
   font-size: 17px;
@@ -33,11 +35,15 @@ p {
   color: #333;
 }
 
-.tap {
+#playBtn {
   margin-top: 15px;
+  padding: 12px 22px;
   font-size: 16px;
-  color: #e60073;
-  font-weight: bold;
+  border: none;
+  border-radius: 25px;
+  background: #e60073;
+  color: white;
+  cursor: pointer;
 }
 
 .emoji {
@@ -48,20 +54,24 @@ p {
 }
 
 @keyframes fall {
-  to { transform: translateY(110vh); opacity: 0; }
+  to {
+    transform: translateY(110vh);
+    opacity: 0;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- AUDIO -->
+<!-- BACKGROUND MUSIC -->
 <audio id="bgMusic" preload="auto">
   <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_4c7b1a8c9e.mp3?filename=romantic-piano-112191.mp3" type="audio/mpeg">
 </audio>
 
 <div class="container">
   <h2>Abhipriya ❤️</h2>
+
   <p>
     aji moi bhal paw buli koileu kom hobo.<br>
     Tumar hahi, tumar kotha, aru tumar logot thaka protitu khon<br>
@@ -79,21 +89,23 @@ p {
     <strong>I love you ❤️</strong>
   </p>
 
-  <div class="tap">💖 Tap anywhere for magic 🎶</div>
+  <button id="playBtn">🎵 Play Music</button>
 </div>
 
 <script>
-// play music after first tap
-document.body.addEventListener('click', function () {
-  const music = document.getElementById("bgMusic");
-  music.volume = 0.7;
-  music.play().catch(() => {});
-}, { once: true });
+const music = document.getElementById("bgMusic");
+const playBtn = document.getElementById("playBtn");
 
-// falling emojis
+playBtn.addEventListener("click", () => {
+  music.volume = 0.7;
+  music.play();
+  playBtn.innerText = "💖 Music Playing";
+});
+
+// Falling emojis
 const emojis = ["💖","💕","💘","✨","🌸","😍"];
 for (let i = 0; i < 30; i++) {
-  let e = document.createElement("div");
+  const e = document.createElement("div");
   e.className = "emoji";
   e.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
   e.style.left = Math.random() * 100 + "vw";
